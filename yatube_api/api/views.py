@@ -13,6 +13,7 @@ User = get_user_model()
 
 
 class PostViewSet(viewsets.ModelViewSet):
+    """View для обработки всех типов запросов с публикациями"""
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = (ReadOnlyOrAuthor,)
@@ -23,12 +24,14 @@ class PostViewSet(viewsets.ModelViewSet):
 
 
 class GroupViewSet(ListRetrieveViewSet):
+    """View для обработки GET запроса с группами"""
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
     permission_classes = (ReadOnlyOrAuthor,)
 
 
 class CommentViewSet(viewsets.ModelViewSet):
+    """View для обработки всех типов запросов с комментариями"""
     serializer_class = CommentSerializer
     permission_classes = (ReadOnlyOrAuthor,)
 
@@ -45,6 +48,9 @@ class CommentViewSet(viewsets.ModelViewSet):
 
 
 class FollowViewSet(CreateListViewSet):
+    """View для обработки POST и GET list запросов с подписками
+    Только для аутентифицированных пользователей
+    """
     serializer_class = FollowSerializer
     permission_classes = (permissions.IsAuthenticated,)
     filter_backends = (filters.SearchFilter,)

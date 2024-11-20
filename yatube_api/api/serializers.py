@@ -7,6 +7,7 @@ User = get_user_model()
 
 
 class PostSerializer(serializers.ModelSerializer):
+    """Сериализатор для модели Post"""
     author = serializers.SlugRelatedField(slug_field='username',
                                           read_only=True)
 
@@ -16,6 +17,7 @@ class PostSerializer(serializers.ModelSerializer):
 
 
 class GroupSerializer(serializers.ModelSerializer):
+    """Сериализатор для модели Group"""
 
     class Meta:
         model = Group
@@ -23,6 +25,7 @@ class GroupSerializer(serializers.ModelSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
+    """Сериализатор для модели Comment"""
     author = serializers.SlugRelatedField(slug_field='username',
                                           read_only=True)
 
@@ -33,6 +36,7 @@ class CommentSerializer(serializers.ModelSerializer):
 
 
 class FollowSerializer(serializers.ModelSerializer):
+    """Сериализатор для модели Follow"""
     user = serializers.SlugRelatedField(
         slug_field='username', read_only=True,
         default=serializers.CurrentUserDefault()
